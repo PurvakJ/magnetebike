@@ -88,42 +88,42 @@ const ProductsPage = () => {
       </div>
 
       {/* Full Screen Image Modal */}
-      {selectedImage && (
-        <div className="fullscreen-modal" onClick={closeFullScreen}>
-          <button className="modal-close" onClick={closeFullScreen}>✕</button>
-          <button className="modal-prev" onClick={(e) => {
-            e.stopPropagation();
-            const currentIndex = products.findIndex(p => p.id === selectedProduct?.id);
-            if (currentIndex > 0) {
-              const prevProduct = products[currentIndex - 1];
-              setSelectedProduct(prevProduct);
-              setSelectedImage(prevProduct.image || 'https://via.placeholder.com/400');
-            }
-          }}>❮</button>
-          
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <img src={selectedImage} alt={selectedProduct?.name} />
-            {selectedProduct && (
-              <div className="modal-info">
-                <h2>{selectedProduct.name}</h2>
-                <p>{selectedProduct.description}</p>
-                <div className="modal-price">₹{selectedProduct.price}</div>
-                <button className="btn btn-primary">Buy Now</button>
-              </div>
-            )}
-          </div>
-          
-          <button className="modal-next" onClick={(e) => {
-            e.stopPropagation();
-            const currentIndex = products.findIndex(p => p.id === selectedProduct?.id);
-            if (currentIndex < products.length - 1) {
-              const nextProduct = products[currentIndex + 1];
-              setSelectedProduct(nextProduct);
-              setSelectedImage(nextProduct.image || 'https://via.placeholder.com/400');
-            }
-          }}>❯</button>
+      {/* Full Screen Image Modal */}
+{selectedImage && (
+  <div className="fullscreen-modal" onClick={closeFullScreen}>
+    <button className="modal-close" onClick={closeFullScreen}>✕</button>
+    <button className="modal-prev" onClick={(e) => {
+      e.stopPropagation();
+      const currentIndex = products.findIndex(p => p.id === selectedProduct?.id);
+      if (currentIndex > 0) {
+        const prevProduct = products[currentIndex - 1];
+        setSelectedProduct(prevProduct);
+        setSelectedImage(prevProduct.image || 'https://via.placeholder.com/400');
+      }
+    }}>❮</button>
+    
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <img src={selectedImage} alt={selectedProduct?.name} />
+      {selectedProduct && (
+        <div className="modal-info" style={{ color: '#000000' }}>
+          <h2 style={{ color: '#000000' }}>{selectedProduct.name}</h2>
+          <p style={{ color: '#000000' }}>{selectedProduct.description}</p>
+          <div className="modal-price" style={{ color: '#aa8d74', fontWeight: 'bold' }}>₹{selectedProduct.price}</div>
         </div>
       )}
+    </div>
+    
+    <button className="modal-next" onClick={(e) => {
+      e.stopPropagation();
+      const currentIndex = products.findIndex(p => p.id === selectedProduct?.id);
+      if (currentIndex < products.length - 1) {
+        const nextProduct = products[currentIndex + 1];
+        setSelectedProduct(nextProduct);
+        setSelectedImage(nextProduct.image || 'https://via.placeholder.com/400');
+      }
+    }}>❯</button>
+  </div>
+)}
     </div>
   );
 };

@@ -9,9 +9,9 @@ const Navbar = () => {
 
   const navLinks = [
     { path: '/', label: 'Home', icon: <FaHome /> },
+    { path: '/about', label: 'About', icon: <FaInfoCircle /> },
     { path: '/products', label: 'Products', icon: <FaStore /> },
     { path: '/client', label: 'Reviews', icon: <FaStar /> },
-    { path: '/about', label: 'About', icon: <FaInfoCircle /> },
     { path: '/contact', label: 'Contact', icon: <FaEnvelope /> },
   ];
 
