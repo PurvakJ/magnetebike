@@ -507,6 +507,9 @@
     .filter-select {
       width: 100%;
     }
+    .modal-info {
+      margin-left: 0px;
+    }
   }
 
   .product-description{
