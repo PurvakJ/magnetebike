@@ -9,6 +9,7 @@ const HomePage = () => {
   const [reviewData, setReviewData] = useState({ name: '', rating: 5, comment: '' });
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [hoveredRating, setHoveredRating] = useState(0); // For star hover effect
 
   // Carousel images
   const carouselImages = [
@@ -45,7 +46,7 @@ const HomePage = () => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % carouselImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [carouselImages.length]); // Added carouselImages.length as dependency
+  }, [carouselImages.length]);
 
   const fetchData = async () => {
     try {
@@ -92,14 +93,33 @@ const HomePage = () => {
   const getTopReviews = () => {
     return [...reviews]
       .sort((a, b) => {
-        // First sort by rating (descending)
         if (a.rating !== b.rating) {
           return b.rating - a.rating;
         }
-        // If ratings are equal, sort by id or date (assuming higher id = newer)
         return (b.id || 0) - (a.id || 0);
       })
       .slice(0, 3);
+  };
+
+  // Star Rating Component
+  const StarRating = ({ rating, onRatingChange, onHover, hoveredRating }) => {
+    return (
+      <div className="star-rating">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <button
+            key={star}
+            type="button"
+            className={`star-btn ${star <= (hoveredRating || rating) ? 'active' : ''}`}
+            onClick={() => onRatingChange(star)}
+            onMouseEnter={() => onHover(star)}
+            onMouseLeave={() => onHover(0)}
+            aria-label={`Rate ${star} stars`}
+          >
+            ★
+          </button>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -217,23 +237,28 @@ const HomePage = () => {
                 onChange={(e) => setReviewData({...reviewData, name: e.target.value})}
                 required
               />
-              <select
-                value={reviewData.rating}
-                onChange={(e) => setReviewData({...reviewData, rating: parseInt(e.target.value)})}
-              >
-                <option value={5}>5 Stars - Excellent</option>
-                <option value={4}>4 Stars - Very Good</option>
-                <option value={3}>3 Stars - Good</option>
-                <option value={2}>2 Stars - Fair</option>
-                <option value={1}>1 Star - Poor</option>
-              </select>
+              
+              {/* Star Rating System */}
+              <div className="form-group">
+                <label>Your Rating</label>
+                <StarRating 
+                  rating={reviewData.rating}
+                  onRatingChange={(rating) => setReviewData({...reviewData, rating})}
+                  onHover={setHoveredRating}
+                  hoveredRating={hoveredRating}
+                />
+              </div>
+              
               <textarea
                 placeholder="Your Review"
                 value={reviewData.comment}
                 onChange={(e) => setReviewData({...reviewData, comment: e.target.value})}
                 required
               />
-              <button type="submit" className="btn btn-primary">Submit Review</button>
+              
+              <div className="submit-center">
+                <button type="submit" className="btn btn-primary">Submit Review</button>
+              </div>
             </form>
           )}
         </div>

@@ -5,9 +5,9 @@ import {
   getProducts, addProduct, 
   getAppointments, getReviews 
 } from '../services/api';
-import { FaBox, FaCalendarCheck, FaStar, FaTrash, FaEdit, FaSignOutAlt } from 'react-icons/fa';
+import { FaBox, FaCalendarCheck, FaStar, FaSignOutAlt } from 'react-icons/fa';
 import './AdminDashboard.css';
-
+//FaTrash, FaEdit,
 const AdminDashboard = () => {
   const { logout, adminUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
@@ -176,7 +176,6 @@ const AdminDashboard = () => {
                       <th>Description</th>
                       <th>Price</th>
                       <th>Image</th>
-                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -188,10 +187,6 @@ const AdminDashboard = () => {
                         <td>${product.price}</td>
                         <td>
                           <img src={product.image || 'https://via.placeholder.com/50'} alt={product.name} style={{width: '50px'}} />
-                        </td>
-                        <td>
-                          <button className="btn-edit"><FaEdit /></button>
-                          <button className="btn-delete"><FaTrash /></button>
                         </td>
                       </tr>
                     ))}
@@ -220,10 +215,6 @@ const AdminDashboard = () => {
                     </div>
                     <p><strong>Phone:</strong> {appointment.phone}</p>
                     <p><strong>Message:</strong> {appointment.message || 'No message'}</p>
-                    <div className="appointment-actions">
-                      <button className="btn-confirm">Confirm</button>
-                      <button className="btn-delete">Delete</button>
-                    </div>
                   </div>
                 ))}
               </div>
@@ -248,10 +239,6 @@ const AdminDashboard = () => {
                       <div className="rating">{'⭐'.repeat(review.rating)}</div>
                     </div>
                     <p>{review.comment}</p>
-                    <div className="review-actions">
-                      <button className="btn-edit">Feature</button>
-                      <button className="btn-delete">Delete</button>
-                    </div>
                   </div>
                 ))}
               </div>
