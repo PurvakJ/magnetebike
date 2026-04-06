@@ -1,0 +1,1440 @@
+/* Footer.css */
+
+.footer {
+    background: #ffffff;
+    color: #000000;
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(170, 141, 116, 0.25);
+}
+
+/* Animated Background Pattern - Removed gradient, kept subtle pattern */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(170, 141, 116, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #aa8d74;
+    animation: none;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    200% {
+        background-position: 200% 0%;
+    }
+}
+
+/* Footer Container */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 20px 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Footer Sections */
+.footer-section {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.footer-section:nth-child(1) { animation-delay: 0.1s; }
+.footer-section:nth-child(2) { animation-delay: 0.2s; }
+.footer-section:nth-child(3) { animation-delay: 0.3s; }
+.footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #000000;
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-heading, 'Forum', sans-serif);
+    font-weight: normal;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #aa8d74;
+    transition: width 0.3s ease;
+}
+
+.footer-section:hover h3::after {
+    width: 100%;
+}
+
+.footer-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #000000;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: #aa8d74;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.footer-section:hover h4::after {
+    width: 50px;
+}
+
+.footer-section p {
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section p:hover {
+    color: #000000;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-icons svg {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #555555;
+}
+
+.social-icons svg:hover {
+    transform: translateY(-3px) scale(1.1);
+    color: #aa8d74;
+}
+
+/* Remove individual brand colors - all hover to warm brown */
+.social-icons svg:nth-child(1):hover,
+.social-icons svg:nth-child(2):hover,
+.social-icons svg:nth-child(3):hover,
+.social-icons svg:nth-child(4):hover {
+    color: #aa8d74;
+}
+
+/* Footer Lists */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-section ul li a {
+    color: #555555;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-section ul li a::before {
+    content: '→';
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: #aa8d74;
+}
+
+.footer-section ul li a:hover {
+    color: #aa8d74;
+    padding-left: 20px;
+}
+
+.footer-section ul li a:hover::before {
+    opacity: 1;
+    left: 0;
+}
+
+/* Contact Info Specific Styles */
+.footer-section:last-child p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.75rem;
+}
+
+.footer-section:last-child p::before {
+    font-size: 1.1rem;
+    color: #aa8d74;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(170, 141, 116, 0.25);
+    background: #fafaf8;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #555555;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem 20px 1.5rem;
+    }
+
+    .footer-section h3::after,
+    .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-section h3,
+    .footer-section h4 {
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-section ul li a:hover {
+        padding-left: 0;
+    }
+
+    .footer-section ul li a::before {
+        display: none;
+    }
+
+    .footer-section ul li a:hover {
+        color: #aa8d74;
+    }
+
+    .footer-section:last-child p {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 1.5rem 15px 1rem;
+        gap: 1.5rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .footer-section h4 {
+        font-size: 1rem;
+    }
+
+    .footer-section p,
+    .footer-section ul li a {
+        font-size: 0.9rem;
+    }
+
+    .social-icons svg {
+        font-size: 1.3rem;
+    }
+
+    .footer-bottom p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Hover Effects for Contact Info */
+.footer-section:last-child p {
+    transition: transform 0.3s ease;
+}
+
+.footer-section:last-child p:hover {
+    transform: translateX(5px);
+    color: #000000;
+}
+
+/* Newsletter Subscription (Optional Addition) */
+.newsletter-form {
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.5rem;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid rgba(170, 141, 116, 0.3);
+    background: #ffffff;
+    border-radius: 8px;
+    color: #000000;
+    transition: all 0.3s ease;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: #aa8d74;
+    background: #fafaf8;
+}
+
+.newsletter-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.newsletter-button {
+    padding: 8px 16px;
+    background: #aa8d74;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-button:hover {
+    transform: translateY(-2px);
+    background: #8b6e58;
+    box-shadow: 0 5px 15px rgba(170, 141, 116, 0.3);
+}
+
+/* Scroll to Top Button (Optional) */
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #aa8d74;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top:hover {
+    transform: translateY(-3px);
+    background: #8b6e58;
+    box-shadow: 0 5px 15px rgba(170, 141, 116, 0.4);
+}
+
+/* Custom Scrollbar */
+.footer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.footer::-webkit-scrollbar-track {
+    background: #fafaf8;
+}
+
+.footer::-webkit-scrollbar-thumb {
+    background: #aa8d74;
+    border-radius: 4px;
+}
+
+/* Print Styles */
+@media print {
+    .footer {
+        background: white;
+        color: black;
+        position: static;
+    }
+
+    .footer::before,
+    .footer::after {
+        display: none;
+    }
+
+    .social-icons svg:hover {
+        transform: none;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .footer-section h3::after,
+    .footer-section h4::after,
+    .footer-section ul li a,
+    .social-icons svg,
+    .footer-section:last-child p {
+        transition: none;
+    }
+
+    .footer::after {
+        animation: none;
+    }
+}
+
+/* Focus Visible for Links */
+.footer-section ul li a:focus-visible,
+.social-icons svg:focus-visible,
+.newsletter-button:focus-visible {
+    outline: 2px solid #aa8d74;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Add these styles to your existing Footer.css */
+
+/* Admin Mobile Link */
+.admin-mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1rem;
+    padding: 10px;
+    background: rgba(170, 141, 116, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #aa8d74;
+    font-weight: 500;
+}
+
+.admin-mobile-link:hover {
+    background: rgba(170, 141, 116, 0.2);
+    transform: translateX(5px);
+}
+
+.admin-icon {
+    font-size: 1.1rem;
+}
+
+/* Keyboard Hint */
+.keyboard-hint {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    opacity: 0.6;
+    letter-spacing: 0.5px;
+}
+
+kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #aa8d74;
+    background: #f5f0eb;
+    border-radius: 4px;
+    font-family: monospace;
+    border: 1px solid rgba(170, 141, 116, 0.3);
+    margin: 0 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .keyboard-hint {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .admin-mobile-link {
+        display: none;
+    }
+}
+
+/* Optional: Add a subtle pulse animation for keyboard hint */
+@keyframes subtlePulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.keyboard-hint {
+    animation: subtlePulse 3s ease-in-out infinite;
+}
+
+/* Add these styles to your existing Footer.css */
+
+/* Social Icons - Make them clickable */
+.social-icons svg {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.social-icons svg:hover {
+    transform: translateY(-3px) scale(1.1);
+    color: #aa8d74;
+}
+
+/* Footer Links - Ensure they work */
+.footer-section ul li a {
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Mobile Links */
+.admin-mobile-link,
+.client-mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1rem;
+    padding: 10px;
+    background: rgba(170, 141, 116, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #aa8d74;
+    font-weight: 500;
+}
+
+.admin-mobile-link:hover,
+.client-mobile-link:hover {
+    background: rgba(170, 141, 116, 0.2);
+    transform: translateX(5px);
+}
+
+.mobile-icon {
+    font-size: 1.1rem;
+}
+
+/* Keyboard Hint */
+.keyboard-hint {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    opacity: 0.6;
+    letter-spacing: 0.5px;
+}
+
+kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #aa8d74;
+    background: #f5f0eb;
+    border-radius: 4px;
+    font-family: monospace;
+    border: 1px solid rgba(170, 141, 116, 0.3);
+    margin: 0 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .keyboard-hint {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .admin-mobile-link,
+    .client-mobile-link {
+        display: none;
+    }
+}
+
+/* Add these styles to your existing Footer.css */
+
+/* Support Section Styles */
+.support-section {
+    cursor: pointer;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.section-header:hover {
+    color: #aa8d74;
+}
+
+.section-content {
+    margin-top: 1rem;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Warranty Card */
+.warranty-card {
+    background: #fafaf8;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(170, 141, 116, 0.15);
+}
+
+.warranty-card h5 {
+    color: #aa8d74;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.coverage-list, .exclusions-list {
+    margin-bottom: 0.75rem;
+}
+
+.coverage-list strong {
+    color: #2e7d32;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.exclusions-list strong {
+    color: #c62828;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.coverage-list ul, .exclusions-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.coverage-list li, .exclusions-list li {
+    padding: 0.25rem 0;
+    font-size: 0.85rem;
+    color: #555555;
+}
+
+.warranty-note {
+    font-size: 0.75rem;
+    color: #888888;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* FAQs List */
+.faqs-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.faq-item {
+    background: #fafaf8;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid rgba(170, 141, 116, 0.1);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(170, 141, 116, 0.3);
+    transform: translateX(5px);
+}
+
+.faq-question {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.faq-icon {
+    font-size: 1rem;
+}
+
+.faq-question strong {
+    color: #000000;
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+.faq-answer {
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.answer-icon {
+    font-size: 0.9rem;
+}
+
+.faq-answer p {
+    color: #555555;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+}
+
+/* Shipping Card */
+.shipping-card {
+    background: #fafaf8;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(170, 141, 116, 0.15);
+}
+
+.shipping-highlight {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(170, 141, 116, 0.1);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.shipping-icon {
+    font-size: 2rem;
+}
+
+.shipping-highlight h5 {
+    color: #aa8d74;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.shipping-highlight p {
+    color: #555555;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.shipping-rates h5 {
+    color: #000000;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.shipping-rates ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.shipping-rates li {
+    padding: 0.25rem 0;
+    font-size: 0.85rem;
+    color: #555555;
+}
+
+.shipping-info {
+    margin: 0.75rem 0;
+    padding: 0.75rem;
+    background: rgba(170, 141, 116, 0.05);
+    border-radius: 8px;
+}
+
+.shipping-info p {
+    font-size: 0.85rem;
+    color: #555555;
+    margin: 0.25rem 0;
+}
+
+.shipping-note {
+    font-size: 0.75rem;
+    color: #888888;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Return Policy Card */
+.return-card {
+    background: #fafaf8;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(170, 141, 116, 0.15);
+}
+
+.return-policy h5 {
+    color: #c62828;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.policy-message {
+    background: rgba(198, 40, 40, 0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    color: #c62828;
+    font-size: 0.85rem;
+}
+
+.policy-details p {
+    color: #555555;
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+}
+
+.policy-details ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0;
+}
+
+.policy-details li {
+    padding: 0.25rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.85rem;
+    color: #555555;
+}
+
+.policy-details li::before {
+    content: '✗';
+    position: absolute;
+    left: 0;
+    color: #c62828;
+}
+
+.warranty-note-box {
+    background: rgba(170, 141, 116, 0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin: 0.75rem 0;
+}
+
+.warranty-note-box strong {
+    color: #aa8d74;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.warranty-note-box p {
+    color: #555555;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.inspection-note {
+    background: rgba(255, 193, 7, 0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-top: 0.75rem;
+}
+
+.inspection-note strong {
+    color: #f57c00;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.inspection-note p {
+    color: #555555;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Scrollbar for FAQs */
+.faqs-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.faqs-list::-webkit-scrollbar-track {
+    background: #fafaf8;
+}
+
+.faqs-list::-webkit-scrollbar-thumb {
+    background: #aa8d74;
+    border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .faq-question strong {
+        font-size: 0.85rem;
+    }
+    
+    .faq-answer p {
+        font-size: 0.8rem;
+    }
+    
+    .shipping-highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .policy-message {
+        font-size: 0.8rem;
+    }
+}
+
+/* Modal Styles - Add to your existing Footer.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .modal-container {
+    background: #ffffff;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(170, 141, 116, 0.2);
+  }
+  
+  .modal-large {
+    max-width: 700px;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(170, 141, 116, 0.2);
+    background: #fafaf8;
+  }
+  
+  .modal-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .modal-icon {
+    font-size: 1.5rem;
+  }
+  
+  .warranty-icon {
+    color: #aa8d74;
+  }
+  
+  .faq-icon {
+    color: #2e7d32;
+  }
+  
+  .shipping-icon {
+    color: #1565c0;
+  }
+  
+  .returns-icon {
+    color: #c62828;
+  }
+  
+  .modal-title h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #000000;
+    font-family: var(--font-heading, 'Forum', sans-serif);
+    font-weight: normal;
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #888888;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-close:hover {
+    color: #aa8d74;
+    background: rgba(170, 141, 116, 0.1);
+    transform: rotate(90deg);
+  }
+  
+  .modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(85vh - 70px);
+  }
+  
+  /* Custom scrollbar for modal */
+  .modal-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .modal-body::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+  }
+  
+  .modal-body::-webkit-scrollbar-thumb {
+    background: #aa8d74;
+    border-radius: 10px;
+  }
+  
+  /* Warranty Modal Styles */
+  .warranty-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #aa8d74;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  
+  .info-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .info-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .info-section h3 svg {
+    color: #aa8d74;
+  }
+  
+  .info-section ul {
+    list-style: none;
+    padding-left: 1.5rem;
+    margin: 0;
+  }
+  
+  .info-section ul li {
+    padding: 0.35rem 0;
+    color: #555555;
+    font-size: 0.9rem;
+    position: relative;
+  }
+  
+  .info-section ul li::before {
+    content: '•';
+    position: absolute;
+    left: -1rem;
+    color: #aa8d74;
+  }
+  
+  .info-section.excluded ul li::before {
+    content: '✗';
+    color: #c62828;
+  }
+  
+  .info-section.process p {
+    background: rgba(170, 141, 116, 0.1);
+    padding: 1rem;
+    border-radius: 12px;
+    color: #555555;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  
+  .info-note {
+    background: rgba(255, 193, 7, 0.1);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    border-left: 3px solid #ffc107;
+  }
+  
+  .info-note p {
+    margin: 0;
+    color: #555555;
+    font-size: 0.85rem;
+  }
+  
+  /* FAQ Modal Styles */
+  .faqs-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .faq-item-modal {
+    background: #fafaf8;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid rgba(170, 141, 116, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item-modal:hover {
+    border-color: rgba(170, 141, 116, 0.3);
+    transform: translateX(5px);
+  }
+  
+  .faq-question-modal {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .faq-q-mark {
+    color: #aa8d74;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .faq-question-modal strong {
+    color: #000000;
+    font-size: 0.95rem;
+    flex: 1;
+  }
+  
+  .faq-answer-modal {
+    display: flex;
+    gap: 12px;
+    padding-left: 0.5rem;
+  }
+  
+  .faq-a-mark {
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .faq-answer-modal p {
+    color: #555555;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+  
+  /* Shipping Modal Styles */
+  .shipping-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #aa8d74, #8b6e58);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .shipping-badge svg {
+    font-size: 1.5rem;
+  }
+  
+  .shipping-badge span {
+    font-weight: 500;
+  }
+  
+  .shipping-rates-list li {
+    padding: 0.5rem 0;
+  }
+  
+  .shipping-note-modal {
+    background: rgba(21, 101, 192, 0.08);
+    border-left-color: #1565c0;
+  }
+  
+  /* Returns Modal Styles */
+  .no-return-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #c62828;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .no-return-badge svg {
+    font-size: 1.5rem;
+  }
+  
+  .policy-message-modal {
+    background: rgba(198, 40, 40, 0.1);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .policy-message-modal p {
+    color: #c62828;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .exceptions ul li::before {
+    content: '✓';
+    color: #2e7d32;
+  }
+  
+  .return-note {
+    background: rgba(198, 40, 40, 0.08);
+    border-left-color: #c62828;
+  }
+  
+  /* Responsive Modal */
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 95%;
+      max-height: 90vh;
+    }
+    
+    .modal-title h2 {
+      font-size: 1.1rem;
+    }
+    
+    .modal-icon {
+      font-size: 1.2rem;
+    }
+    
+    .modal-body {
+      padding: 1rem;
+    }
+    
+    .faq-question-modal strong {
+      font-size: 0.85rem;
+    }
+    
+    .faq-answer-modal p {
+      font-size: 0.8rem;
+    }
+    
+    .warranty-badge,
+    .shipping-badge,
+    .no-return-badge {
+      font-size: 0.85rem;
+      padding: 8px 16px;
+    }
+    
+    .info-section h3 {
+      font-size: 0.9rem;
+    }
+    
+    .info-section ul li {
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* Reduce motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .modal-overlay,
+    .modal-container,
+    .modal-close {
+      animation: none;
+      transition: none;
+    }
+  }
+
+  /* Add these styles to your existing Footer.css */
+
+/* Style for footer link buttons to look like links */
+.footer-link-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  text-align: left;
+  transition: color 0.3s ease;
+}
+
+.footer-link-button:hover {
+  color: #aa8d74;
+  text-decoration: underline;
+}
+
+/* For dark theme footers, adjust accordingly */
+.footer-section ul li .footer-link-button {
+  display: inline-block;
+  width: 100%;
+}
+
+/* Ensure buttons are accessible for keyboard navigation */
+.footer-link-button:focus {
+  outline: 2px solid #aa8d74;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Mobile View: Center the Support Section buttons */
+@media (max-width: 768px) {
+    /* Center the Support section heading */
+    .footer-section:nth-child(3) h4 {
+      text-align: center;
+    }
+  
+    /* Center and style the support buttons container */
+    .footer-section:nth-child(3) ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  
+    /* Center the button text and make them wider for easier tapping */
+    .footer-section:nth-child(3) ul li {
+      text-align: center;
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  
+    .footer-link-button {
+      text-align: center;
+      width: 100%;
+      padding: 8px 0;
+      font-size: 1rem;
+    }
+  }
+  
+  /* For very small screens, adjust spacing */
+  @media (max-width: 480px) {
+    .footer-section:nth-child(3) ul li {
+      max-width: 180px;
+    }
+    
+    .footer-link-button {
+      font-size: 0.95rem;
+      padding: 10px 0;
+    }
+  }
+
+  /* Add this to your Footer.css - Mobile view center alignment for Admin and Review buttons */
+
+/* Mobile View: Center the Admin and Review buttons */
+@media (max-width: 768px) {
+    /* Center the Contact Info section heading */
+    .footer-section:last-child h4 {
+      text-align: center;
+    }
+  
+    /* Center and style the admin and review buttons container */
+    .footer-section:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    /* Center the button text and make them wider for easier tapping */
+    .admin-mobile-link,
+    .client-mobile-link {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-width: 250px;
+      margin: 0.5rem auto;
+    }
+  
+    .admin-mobile-link span,
+    .client-mobile-link span {
+      text-align: center;
+    }
+  }
+  
+  /* For very small screens */
+  @media (max-width: 480px) {
+    .admin-mobile-link,
+    .client-mobile-link {
+      max-width: 220px;
+      padding: 12px;
+    }
+  }

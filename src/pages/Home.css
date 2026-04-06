@@ -1,0 +1,839 @@
+/* Home.css - Updated with Enhanced Carousel Animations */
+
+/* Reset for fullscreen */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.homepage {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Section Titles */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #000000;
+    position: relative;
+    padding-bottom: 1rem;
+    font-family: var(--font-heading, 'Forum', sans-serif);
+    font-weight: normal;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #aa8d74;
+}
+
+/* Full Screen Carousel Section */
+.carousel-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+    transition: transform 6s ease-out;
+}
+
+/* Zoom effect on active slide */
+.carousel-slide.active .carousel-image {
+    transform: scale(1.08);
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Enhanced Content Animations */
+.carousel-content {
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.carousel-slide.active .carousel-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.carousel-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-heading, 'Forum', sans-serif);
+    font-weight: normal;
+    color: white;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+
+.carousel-slide.active .carousel-content h2 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.carousel-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.carousel-slide.active .carousel-content p {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Carousel Navigation Arrows - Animated */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.carousel-section:hover .carousel-arrow {
+    opacity: 1;
+    visibility: visible;
+}
+
+.carousel-arrow:hover {
+    background: rgba(170, 141, 116, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow.prev {
+    left: 20px;
+}
+
+.carousel-arrow.next {
+    right: 20px;
+}
+
+/* Animated Dots Navigation */
+.carousel-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.carousel-dot::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: #aa8d74;
+    width: 30px;
+    border-radius: 20px;
+    transform: scale(1);
+}
+
+.carousel-dot.active::before {
+    border: 1px solid rgba(170, 141, 116, 0.5);
+}
+
+/* Featured Products */
+.featured-products {
+    padding: 5rem 0;
+    background: #ffffff;
+}
+
+/* Products in a single row - Flex layout */
+.products-flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Product card styling with animation */
+.product-card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(170, 141, 116, 0.15);
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(170, 141, 116, 0.3);
+}
+
+.product-image-wrapper {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+.product-card h3 {
+    font-size: 1.3rem;
+    margin: 1rem 0 0.5rem;
+    color: #000000;
+    font-family: var(--font-heading, 'Forum', sans-serif);
+    font-weight: normal;
+}
+
+.product-card p {
+    color: #555555;
+    padding: 0 1rem;
+    line-height: 1.6;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #aa8d74;
+    font-weight: bold;
+    margin: 1rem 0 1.5rem;
+}
+
+/* Features Section */
+.features {
+    padding: 5rem 0;
+    background: #fafaf8;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature {
+    text-align: center;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(170, 141, 116, 0.1);
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.feature:nth-child(1) { animation-delay: 0.1s; }
+.feature:nth-child(2) { animation-delay: 0.2s; }
+.feature:nth-child(3) { animation-delay: 0.3s; }
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-color: rgba(170, 141, 116, 0.3);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.feature:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+.feature h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #000000;
+    font-family: var(--font-heading, 'Forum', sans-serif);
+    font-weight: normal;
+}
+
+.feature p {
+    color: #555555;
+    line-height: 1.6;
+}
+
+/* Reviews Section */
+.reviews {
+    padding: 5rem 0;
+    background: #ffffff;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.review-card {
+    background: #fafaf8;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(170, 141, 116, 0.1);
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.review-card:nth-child(1) { animation-delay: 0.1s; }
+.review-card:nth-child(2) { animation-delay: 0.2s; }
+.review-card:nth-child(3) { animation-delay: 0.3s; }
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.rating {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.comment {
+    font-style: italic;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.review-card h4 {
+    color: #aa8d74;
+    margin-top: 1rem;
+}
+
+.review-action {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.review-form {
+    max-width: 500px;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    background: #fafaf8;
+    border-radius: 15px;
+    border: 1px solid rgba(170, 141, 116, 0.2);
+    animation: fadeInUp 0.5s ease;
+}
+
+.review-form h3 {
+    margin-bottom: 1.5rem;
+    color: #000000;
+    text-align: center;
+    font-family: var(--font-heading, 'Forum', sans-serif);
+    font-weight: normal;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(170, 141, 116, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.review-form input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+    outline: none;
+    border-color: #aa8d74;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(170, 141, 116, 0.1);
+}
+
+.review-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Booking Section */
+.booking {
+    padding: 5rem 0;
+    background: #fafaf8;
+}
+
+.booking-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    animation: fadeInUp 0.6s ease;
+}
+
+.booking-info p {
+    font-size: 1.1rem;
+    color: #555555;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.booking-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.booking-highlights span {
+    color: #000000;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.booking-highlights span:hover {
+    transform: translateX(5px);
+    color: #aa8d74;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.booking-form input,
+.booking-form textarea {
+    padding: 12px 15px;
+    border: 1px solid rgba(170, 141, 116, 0.3);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.booking-form input:focus,
+.booking-form textarea:focus {
+    outline: none;
+    border-color: #aa8d74;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(170, 141, 116, 0.1);
+}
+
+.booking-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Buttons with animations */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: #aa8d74;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #8b6e58;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(170, 141, 116, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #aa8d74;
+    border: 2px solid #aa8d74;
+}
+
+.btn-outline:hover {
+    background: #aa8d74;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Desktop Large Screens */
+@media (min-width: 1200px) {
+    .products-flex-row {
+        flex-wrap: nowrap;
+    }
+    
+    .product-card {
+        min-width: 0;
+        width: 100%;
+    }
+    
+    .carousel-content h2 {
+        font-size: 4rem;
+    }
+    
+    .carousel-content p {
+        font-size: 1.4rem;
+    }
+}
+
+/* Desktop and Tablet */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .products-flex-row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .product-card {
+        flex: 0 1 calc(33.333% - 2rem);
+        min-width: 250px;
+    }
+    
+    .carousel-content h2 {
+        font-size: 3rem;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .carousel-section {
+        height: 100vh;
+        min-height: 100vh;
+    }
+    
+    .carousel-content h2 {
+        font-size: 2rem;
+    }
+    
+    .carousel-content p {
+        font-size: 1rem;
+    }
+    
+    .carousel-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .carousel-arrow.prev {
+        left: 10px;
+    }
+    
+    .carousel-arrow.next {
+        right: 10px;
+    }
+    
+    .products-flex-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .product-card {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .features-grid,
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .booking-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .booking-info {
+        text-align: center;
+    }
+    
+    .booking-highlights {
+        align-items: center;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .carousel-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-content p {
+        font-size: 0.9rem;
+    }
+    
+    .carousel-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .carousel-dot.active {
+        width: 25px;
+    }
+    
+    .featured-products,
+    .features,
+    .reviews,
+    .booking {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .product-card h3,
+    .feature h3 {
+        font-size: 1.2rem;
+    }
+    
+    .price {
+        font-size: 1.2rem;
+    }
+    
+    .review-card {
+        padding: 1.5rem;
+    }
+    
+    .review-form {
+        padding: 1.5rem;
+    }
+}
+
+/* Remove loading styles */
+.loading-container,
+.spinner {
+    display: none;
+}
+
+/* Ensure body has no margins */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Fix for any unwanted spacing */
+.carousel-section,
+.carousel-container,
+.carousel-slides,
+.carousel-slide,
+.carousel-image-wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+.section-title{
+    margin-bottom: 40px;
+}
