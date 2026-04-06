@@ -69,9 +69,6 @@ const AdminLogin = () => {
             </button>
           </form>
 
-          <div className="login-footer">
-            <p>Demo Credentials: admin / admin123</p>
-          </div>
         </div>
       </div>
     </div>
