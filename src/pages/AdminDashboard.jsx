@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { 
-  getProducts, addProduct, 
-  getAppointments, getReviews 
+  getProducts, addProduct, updateProduct, deleteProduct,
+  getAppointments,
+  getReviews, deleteReview
 } from '../services/api';
-import { FaBox, FaCalendarCheck, FaStar, FaSignOutAlt } from 'react-icons/fa';
+import { FaBox, FaCalendarCheck, FaStar, FaTrash, FaEdit, FaSignOutAlt } from 'react-icons/fa';
 import './AdminDashboard.css';
-//FaTrash, FaEdit,
+
 const AdminDashboard = () => {
   const { logout, adminUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
@@ -16,7 +17,12 @@ const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Modal states
   const [showProductModal, setShowProductModal] = useState(false);
+  const [showEditProductModal, setShowEditProductModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  
   const [newProduct, setNewProduct] = useState({
     name: '',
     description: '',
@@ -25,14 +31,12 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    // If not authenticated after auth loading, redirect
     if (!authLoading && !localStorage.getItem('adminToken')) {
       navigate('/admin/login');
       return;
     }
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authLoading, navigate]); // Added navigate to dependencies
+  }, [authLoading, navigate]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -62,6 +66,44 @@ const AdminDashboard = () => {
       alert('Product added successfully!');
     } catch (error) {
       alert('Error adding product');
+    }
+  };
+
+  const handleUpdateProduct = async (e) => {
+    e.preventDefault();
+    try {
+      await updateProduct(selectedProduct);
+      setShowEditProductModal(false);
+      setSelectedProduct(null);
+      fetchData();
+      alert('Product updated successfully!');
+    } catch (error) {
+      alert('Error updating product');
+    }
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      try {
+        await deleteProduct({ id: productId });
+        fetchData();
+        alert('Product deleted successfully!');
+      } catch (error) {
+        alert('Error deleting product');
+      }
+    }
+  };
+
+
+  const handleDeleteReview = async (reviewId) => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+      try {
+        await deleteReview({ id: reviewId });
+        fetchData();
+        alert('Review deleted successfully!');
+      } catch (error) {
+        alert('Error deleting review');
+      }
     }
   };
 
@@ -176,6 +218,7 @@ const AdminDashboard = () => {
                       <th>Description</th>
                       <th>Price</th>
                       <th>Image</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -187,6 +230,23 @@ const AdminDashboard = () => {
                         <td>${product.price}</td>
                         <td>
                           <img src={product.image || 'https://via.placeholder.com/50'} alt={product.name} style={{width: '50px'}} />
+                        </td>
+                        <td>
+                          <button 
+                            className="btn-edit" 
+                            onClick={() => {
+                              setSelectedProduct(product);
+                              setShowEditProductModal(true);
+                            }}
+                          >
+                            <FaEdit />
+                          </button>
+                          <button 
+                            className="btn-delete" 
+                            onClick={() => handleDeleteProduct(product.id)}
+                          >
+                            <FaTrash />
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -207,11 +267,10 @@ const AdminDashboard = () => {
               <p className="no-data">No appointments yet.</p>
             ) : (
               <div className="appointments-list">
-                {appointments.map((appointment, index) => (
-                  <div key={index} className="appointment-card">
+                {appointments.map((appointment) => (
+                  <div key={appointment.id} className="appointment-card">
                     <div className="appointment-header">
                       <h3>{appointment.name}</h3>
-                      <span className="status pending">Pending</span>
                     </div>
                     <p><strong>Phone:</strong> {appointment.phone}</p>
                     <p><strong>Message:</strong> {appointment.message || 'No message'}</p>
@@ -232,13 +291,21 @@ const AdminDashboard = () => {
               <p className="no-data">No reviews yet.</p>
             ) : (
               <div className="reviews-list">
-                {reviews.map((review, index) => (
-                  <div key={index} className="review-card">
+                {reviews.map((review) => (
+                  <div key={review.id} className="review-card">
                     <div className="review-header">
                       <h3>{review.name}</h3>
                       <div className="rating">{'⭐'.repeat(review.rating)}</div>
                     </div>
                     <p>{review.comment}</p>
+                    <div className="review-actions">
+                      <button 
+                        className="btn-delete" 
+                        onClick={() => handleDeleteReview(review.id)}
+                      >
+                        <FaTrash /> Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -273,6 +340,7 @@ const AdminDashboard = () => {
                   <label>Price ($)</label>
                   <input
                     type="number"
+                    step="0.01"
                     value={newProduct.price}
                     onChange={(e) => setNewProduct({...newProduct, price: e.target.value})}
                     required
@@ -290,6 +358,57 @@ const AdminDashboard = () => {
                 <div className="modal-actions">
                   <button type="button" onClick={() => setShowProductModal(false)}>Cancel</button>
                   <button type="submit">Add Product</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Edit Product Modal */}
+        {showEditProductModal && selectedProduct && (
+          <div className="modal-overlay" onClick={() => setShowEditProductModal(false)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <h2>Edit Product</h2>
+              <form onSubmit={handleUpdateProduct}>
+                <div className="form-group">
+                  <label>Product Name</label>
+                  <input
+                    type="text"
+                    value={selectedProduct.name}
+                    onChange={(e) => setSelectedProduct({...selectedProduct, name: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Description</label>
+                  <textarea
+                    value={selectedProduct.description}
+                    onChange={(e) => setSelectedProduct({...selectedProduct, description: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Price ($)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={selectedProduct.price}
+                    onChange={(e) => setSelectedProduct({...selectedProduct, price: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Image URL</label>
+                  <input
+                    type="text"
+                    value={selectedProduct.image}
+                    onChange={(e) => setSelectedProduct({...selectedProduct, image: e.target.value})}
+                    placeholder="https://example.com/image.jpg"
+                  />
+                </div>
+                <div className="modal-actions">
+                  <button type="button" onClick={() => setShowEditProductModal(false)}>Cancel</button>
+                  <button type="submit">Update Product</button>
                 </div>
               </form>
             </div>

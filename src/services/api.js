@@ -1,13 +1,13 @@
 import axios from "axios";
 
 // Replace with your actual Google Apps Script URL
-const API = "https://script.google.com/macros/s/AKfycbzjrvlnsxuseSHsCQy4FDJ8FDSKzGIAdzrYTRM1Rof32uKP0iCu_FF75iY_maTNZMS8VQ/exec";
+const API = "https://script.google.com/macros/s/AKfycbwMNk5sbrbIo6RrFVs204-vpe9wdzVolQOmdeBGgsylHt_iSAg_JroXzCtjJa2wygD48Q/exec";
 
 // Create axios instance with default config
 const apiClient = axios.create({
   timeout: 10000,
   headers: {
-    'Content-Type': 'text/plain', // Changed to text/plain for Google Apps Script
+    'Content-Type': 'text/plain',
   }
 });
 
@@ -21,12 +21,42 @@ export const getProducts = async () => {
   }
 };
 
-export const getReviews = async () => {
+export const addProduct = async (data) => {
   try {
-    const response = await apiClient.get(`${API}?type=reviews`);
+    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "addProduct" }));
     return response;
   } catch (error) {
-    console.error('Error fetching reviews:', error);
+    console.error('Error adding product:', error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (data) => {
+  try {
+    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "updateProduct" }));
+    return response;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (data) => {
+  try {
+    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "deleteProduct" }));
+    return response;
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    throw error;
+  }
+};
+
+export const getAppointments = async () => {
+  try {
+    const response = await apiClient.get(`${API}?type=appointments`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching appointments:', error);
     throw error;
   }
 };
@@ -41,6 +71,36 @@ export const bookAppointment = async (data) => {
   }
 };
 
+export const updateAppointment = async (data) => {
+  try {
+    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "updateAppointment" }));
+    return response;
+  } catch (error) {
+    console.error('Error updating appointment:', error);
+    throw error;
+  }
+};
+
+export const deleteAppointment = async (data) => {
+  try {
+    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "deleteAppointment" }));
+    return response;
+  } catch (error) {
+    console.error('Error deleting appointment:', error);
+    throw error;
+  }
+};
+
+export const getReviews = async () => {
+  try {
+    const response = await apiClient.get(`${API}?type=reviews`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    throw error;
+  }
+};
+
 export const addReview = async (data) => {
   try {
     const response = await apiClient.post(API, JSON.stringify({ ...data, type: "review" }));
@@ -51,25 +111,22 @@ export const addReview = async (data) => {
   }
 };
 
-export const addProduct = async (data) => {
+export const updateReview = async (data) => {
   try {
-    console.log('Sending product data:', data); // Debug log
-    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "addProduct" }));
-    console.log('Product added response:', response.data); // Debug log
+    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "updateReview" }));
     return response;
   } catch (error) {
-    console.error('Error adding product:', error);
-    console.error('Error details:', error.response);
+    console.error('Error updating review:', error);
     throw error;
   }
 };
 
-export const getAppointments = async () => {
+export const deleteReview = async (data) => {
   try {
-    const response = await apiClient.get(`${API}?type=appointments`);
+    const response = await apiClient.post(API, JSON.stringify({ ...data, type: "deleteReview" }));
     return response;
   } catch (error) {
-    console.error('Error fetching appointments:', error);
+    console.error('Error deleting review:', error);
     throw error;
   }
 };
