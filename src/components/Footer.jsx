@@ -127,7 +127,7 @@ const Footer = () => {
     coverage: [
       "Frame and fork defects",
       "Motor and electrical components",
-      "Battery (500 charge cycles or 1 year)",
+      "Battery (Max 300 charge cycles or 1 year)",
       "Controller and display unit",
       "Throttle and sensors",
       "Charger"
@@ -146,7 +146,7 @@ const Footer = () => {
   // Shipping Data
   const shippingData = {
     freeShippingThreshold: "50 km radius from our service centers",
-    standardRate: "$49.99 for orders under $500",
+    standardRate: "₹499.99 for orders under ₹29999",
     expressRate: "$79.99 for expedited delivery (2-3 business days)",
     deliveryTime: "5-7 business days for standard shipping",
     assembly: "Bikes come 85% pre-assembled. Final assembly (handlebars, pedals, front wheel) required.",
