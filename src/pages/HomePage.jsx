@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getProducts, getReviews, bookAppointment, addReview } from '../services/api';
 import './Home.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [appointmentData, setAppointmentData] = useState({ name: '', phone: '', message: '' });
@@ -11,32 +13,70 @@ const HomePage = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [hoveredRating, setHoveredRating] = useState(0); // For star hover effect
 
-  // Carousel images
+  // Updated Carousel images with new URLs
   const carouselImages = [
     {
-      url: 'https://i.postimg.cc/RZXH0sMd/attractive-woman-riding-motorbike-street-summer-vacation-style-traveling-smiling-happy-having-fun-st.jpg',
+      url: 'https://i.postimg.cc/mkxZDBxB/Whats-App-Image-2026-04-05-at-19-51-20-2.jpg',
       title: 'Urban Ride Style',
-      subtitle: 'Enjoy the freedom of city rides'
+      subtitle: 'Enjoy the freedom of city rides',
+      ctaText: 'Explore Urban Series',
+      ctaLink: '/products?category=urban'
     },
     {
-      url: 'https://i.postimg.cc/jd6fpqm9/beautiful-woman-with-long-brown-hair-dressed-trendy-clothes-posing-with-white-retro-italian-scooter.jpg',
+      url: 'https://i.postimg.cc/RhrCF4rv/Whats-App-Image-2026-04-05-at-19-51-21-2.jpg',
       title: 'Retro Scooter Vibes',
-      subtitle: 'Classic style meets modern confidence'
+      subtitle: 'Classic style meets modern confidence',
+      ctaText: 'Discover Retro Collection',
+      ctaLink: '/products?category=retro'
     },
     {
-      url: 'https://i.postimg.cc/8Pdv2k9B/girl-sunglasses-wearing-leather-jacket-ripped-jeans-sitting-black-classic-scooter-old-narrow-street.jpg',
+      url: 'https://i.postimg.cc/05JbqHgk/Gemini-Generated-Image-ggbgn3ggbgn3ggbg.jpg',
       title: 'Street Fashion Ride',
-      subtitle: 'Ride bold with attitude and style'
+      subtitle: 'Ride bold with attitude and style',
+      ctaText: 'Shop Street Edition',
+      ctaLink: '/products?category=street'
     },
     {
-      url: 'https://i.postimg.cc/1XX9JBxy/retro-moto-scooter-street-urban-style-(1).jpg',
+      url: 'https://i.postimg.cc/MZjv8rkz/Gemini-Generated-Image-9t9syv9t9syv9t9s.jpg',
       title: 'Retro City Cruise',
-      subtitle: 'Timeless scooter design for urban life'
+      subtitle: 'Timeless scooter design for urban life',
+      ctaText: 'View Retro Models',
+      ctaLink: '/products?category=retro'
     },
     {
-      url: 'https://i.postimg.cc/VkDCNGY6/scooter_parked_urban_street_sustainable_transport_eco_mobility.jpg',
+      url: 'https://i.postimg.cc/C5D1HdCQ/Gemini-Generated-Image-gpq26igpq26igpq2.jpg',
       title: 'Summer Ride Moments',
-      subtitle: 'Feel the breeze and enjoy the journey'
+      subtitle: 'Feel the breeze and enjoy the journey',
+      ctaText: 'Summer Collection',
+      ctaLink: '/products?category=summer'
+    },
+    {
+      url: 'https://i.postimg.cc/qqnRXgcb/Gemini-Generated-Image-hyfcx1hyfcx1hyfc.jpg',
+      title: 'Electric Freedom',
+      subtitle: 'Eco-friendly commuting made stylish',
+      ctaText: 'Go Electric',
+      ctaLink: '/products'
+    },
+    {
+      url: 'https://i.postimg.cc/JhnzYpcs/Gemini-Generated-Image-ievzitievzitievz.jpg',
+      title: 'Modern Commuter',
+      subtitle: 'Designed for the daily journey',
+      ctaText: 'Commuter Series',
+      ctaLink: '/products?category=commuter'
+    },
+    {
+      url: 'https://i.postimg.cc/QMtdYfkW/Gemini-Generated-Image-lwji9rlwji9rlwji.jpg',
+      title: 'Night Rider',
+      subtitle: 'Illuminate the streets with style',
+      ctaText: 'Night Edition',
+      ctaLink: '/products?category=night'
+    },
+    {
+      url: 'https://i.postimg.cc/zBHX83c2/Gemini-Generated-Image-miny62miny62miny.jpg',
+      title: 'Adventure Awaits',
+      subtitle: 'Take the scenic route',
+      ctaText: 'Adventure Series',
+      ctaLink: '/products'
     }
   ];
 
@@ -87,6 +127,14 @@ const HomePage = () => {
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
 
   // Get top 3 reviews (highest rated, then newest)
@@ -141,12 +189,27 @@ const HomePage = () => {
                     <div className="carousel-content">
                       <h2>{image.title}</h2>
                       <p>{image.subtitle}</p>
+                      {/* See Product Button on Carousel */}
+                      <button 
+                        className="btn btn-carousel"
+                        onClick={() => navigate(image.ctaLink)}
+                      >
+                        {image.ctaText || 'See Product'} →
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+          
+          {/* Navigation Arrows */}
+          <button className="carousel-arrow prev" onClick={prevSlide} aria-label="Previous slide">
+            ‹
+          </button>
+          <button className="carousel-arrow next" onClick={nextSlide} aria-label="Next slide">
+            ›
+          </button>
           
           {/* Dots Navigation */}
           <div className="carousel-dots">
@@ -175,6 +238,7 @@ const HomePage = () => {
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
                 <div className="price">₹{product.price}</div>
+                {/* See Product Button */}
               </div>
             ))}
           </div>

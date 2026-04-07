@@ -943,3 +943,195 @@ body {
         gap: 5px;
     }
 }
+
+/* Carousel Button Styles - Enhanced */
+.btn-carousel {
+    display: inline-block;
+    padding: 14px 35px;
+    margin-top: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #aa8d74 0%, #8b6e58 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    letter-spacing: 1px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s, all 0.3s ease;
+}
+
+.carousel-slide.active .btn-carousel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn-carousel::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn-carousel:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-carousel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(170, 141, 116, 0.4);
+    background: linear-gradient(135deg, #8b6e58 0%, #6e5543 100%);
+}
+
+.btn-carousel:active {
+    transform: translateY(0);
+}
+
+/* Carousel Button Animation on Hover */
+.btn-carousel:hover {
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* See Product Button for Featured Products */
+.btn-see-product {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-see-product:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-see-product:active {
+    transform: translateY(0);
+}
+
+/* Responsive Styles for Carousel Button */
+@media (max-width: 768px) {
+    .btn-carousel {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-carousel {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+        margin-top: 10px;
+    }
+}
+
+/* Enhanced Carousel Content Spacing */
+.carousel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Optional: Add a subtle glow effect to carousel button */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(170, 141, 116, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(170, 141, 116, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(170, 141, 116, 0.5);
+    }
+}
+
+.btn-carousel:focus {
+    outline: none;
+    animation: glow 1.5s ease-in-out infinite;
+}
+
+/* Hover effect for product card button container */
+.product-card {
+    position: relative;
+}
+
+/* Add a subtle border animation on product card hover */
+.product-card:hover .btn-see-product {
+    animation: subtlePulse 0.5s ease;
+}
+
+@keyframes subtlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* Ensure buttons are accessible */
+.btn-carousel,
+.btn-see-product {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Disabled state (if needed) */
+.btn-carousel:disabled,
+.btn-see-product:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .btn-carousel:hover,
+    .btn-see-product:hover {
+        transform: none;
+    }
+    
+    .btn-carousel:active,
+    .btn-see-product:active {
+        transform: scale(0.98);
+    }
+}
