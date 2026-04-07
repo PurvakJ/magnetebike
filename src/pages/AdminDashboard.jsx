@@ -227,7 +227,7 @@ const AdminDashboard = () => {
                         <td>{product.id}</td>
                         <td>{product.name}</td>
                         <td>{product.description}</td>
-                        <td>${product.price}</td>
+                        <td>₹{product.price}</td>
                         <td>
                           <img src={product.image || 'https://via.placeholder.com/50'} alt={product.name} style={{width: '50px'}} />
                         </td>
@@ -337,7 +337,7 @@ const AdminDashboard = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Price ($)</label>
+                  <label>Price (₹)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -388,7 +388,7 @@ const AdminDashboard = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Price ($)</label>
+                  <label>Price (₹)</label>
                   <input
                     type="number"
                     step="0.01"
