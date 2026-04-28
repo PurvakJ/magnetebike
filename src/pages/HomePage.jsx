@@ -332,17 +332,17 @@ const HomePage = () => {
             <div className="feature">
               <div className="feature-icon">⚡</div>
               <h3>Powerful Motor</h3>
-              <p>750W brushless motor for smooth acceleration</p>
+              <p>250W brushless motor for smooth acceleration</p>
             </div>
             <div className="feature">
               <div className="feature-icon">🔋</div>
               <h3>Long Range Battery</h3>
-              <p>Up to 60 miles on a single charge</p>
+              <p>50 to 120 miles on a single charge</p>
             </div>
             <div className="feature">
               <div className="feature-icon">🛡️</div>
               <h3>Durable Frame</h3>
-              <p>Aluminum alloy frame for strength and lightness</p>
+              <p>Iron frame for strength and durablity</p>
             </div>
           </div>
         </div>
