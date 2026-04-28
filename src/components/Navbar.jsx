@@ -63,7 +63,7 @@ const Navbar = () => {
         {/* Logo Image */}
         <Link to="/" className="nav-logo" onClick={closeMenu}>
           <img
-            src="https://i.postimg.cc/KYHcDfBJ/Gemini-Generated-Image-lnyaeylnyaeylnya.png"
+            src="https://i.postimg.cc/76NkQN2T/631663911-941393348446423-527384203706587613-n-removebg-preview.png"
             alt="Magnet eBike Logo"
             className="nav-logo-img"
           />
