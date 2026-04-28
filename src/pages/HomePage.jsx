@@ -342,7 +342,7 @@ const HomePage = () => {
             <div className="feature">
               <div className="feature-icon">🛡️</div>
               <h3>Durable Frame</h3>
-              <p>Iron frame for strength and durablity</p>
+              <p>Heavy frame for strength and durablity</p>
             </div>
           </div>
         </div>

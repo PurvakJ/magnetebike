@@ -24,7 +24,7 @@ const AboutPage = () => {
           <div className="about-content">
             <h2>Our Story</h2>
             <p>
-              Founded in 2016, Magnet eBike was born from a simple idea: retail electric biking 
+              Founded in 2025, Magnet eBike was born from a simple idea: retail electric biking 
               accessible, exciting, and practical for everyone. We saw a gap in the market for 
               high-quality e-bikes that don't break the bank, and we set out to fill it.
             </p>
@@ -35,10 +35,7 @@ const AboutPage = () => {
               we're just getting started on our journey to transform urban mobility.
             </p>
             <div className="stats-container">
-              <div className="stat">
-                <div className="stat-number">10K+</div>
-                <div className="stat-label">Happy Customers</div>
-              </div>
+
               <div className="stat">
                 <div className="stat-number">50+</div>
                 <div className="stat-label">Cities Served</div>
