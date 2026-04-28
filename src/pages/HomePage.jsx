@@ -12,6 +12,37 @@ const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [hoveredRating, setHoveredRating] = useState(0); // For star hover effect
+  // Add these new state variables inside your HomePage component
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showProductModal, setShowProductModal] = useState(false);
+
+  // Add this function to open product modal
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setShowProductModal(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Add this function to close product modal
+  const closeProductModal = () => {
+    setShowProductModal(false);
+    setSelectedProduct(null);
+    document.body.style.overflow = 'auto';
+  };
+
+  // Add keyboard event listener for modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && showProductModal) {
+        closeProductModal();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+    };
+  }, [showProductModal]);
 
   // Updated Carousel images with new URLs
   const carouselImages = [
@@ -94,12 +125,14 @@ const HomePage = () => {
         getProducts(),
         getReviews()
       ]);
-      setProducts(productsRes.data.slice(0, 3));
+      setProducts(productsRes.data); // Remove .slice(0, 3) to get all products
       setReviews(reviewsRes.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+
+
 
   const handleAppointmentSubmit = async (e) => {
     e.preventDefault();
@@ -226,24 +259,70 @@ const HomePage = () => {
       </section>
 
       {/* Featured Products Section - Single row flex layout */}
-      <section className="featured-products">
-        <div className="container">
-          <h2 className="section-title">Featured Products</h2>
-          <div className="products-flex-row">
-            {products.map((product) => (
-              <div key={product.id} className="product-card">
-                <div className="product-image-wrapper">
-                  <img src={product.image || 'https://via.placeholder.com/300'} alt={product.name} />
-                </div>
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
-                <div className="price">₹{product.price}</div>
-                {/* See Product Button */}
-              </div>
-            ))}
+{/* Featured Products Section - All Products */}
+<section className="featured-products">
+  <div className="products-fullwidth">
+    <h2 className="section-title">Featured Products</h2>
+    <div className="products-flex-row">
+      {products.map((product) => (
+        <div 
+          key={product.id} 
+          className="product-card"
+          onClick={() => openProductModal(product)}
+        >
+          <div className="product-image-wrapper">
+            <img src={product.image || 'https://via.placeholder.com/300'} alt={product.name} />
+            <div className="product-overlay">
+              <span className="view-icon">👁️</span>
+              <span>Click to view details</span>
+            </div>
           </div>
+          <h3>{product.name}</h3>
+          <p>{product.description}</p>
+          <div className="price">₹{product.price}</div>
+          <button className="btn-see-product">View Product →</button>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Product Modal - Full Screen Preview */}
+{showProductModal && selectedProduct && (
+  <div className="product-modal-overlay" onClick={closeProductModal}>
+    <div className="product-modal-container">
+      <button className="modal-close-btn" onClick={closeProductModal}>✕</button>
+      
+      <div className="product-modal-content">
+        <div className="product-modal-image">
+          <img src={selectedProduct.image || 'https://via.placeholder.com/500'} alt={selectedProduct.name} />
+        </div>
+        
+        <div className="product-modal-details">
+          <h2>{selectedProduct.name}</h2>
+          <div className="product-modal-price">₹{selectedProduct.price}</div>
+          
+          <div className="product-modal-description">
+            <h3>Product Details</h3>
+            <p>{selectedProduct.description}</p>
+          </div>
+          
+          <div className="product-modal-specs">
+            <h3>Specifications</h3>
+            <ul>
+              <li><strong>Battery:</strong> 48V 20Ah Lithium-ion</li>
+              <li><strong>Range:</strong> Up to 60 miles</li>
+              <li><strong>Motor:</strong> 750W Brushless</li>
+              <li><strong>Max Speed:</strong> 28 mph</li>
+              <li><strong>Charging Time:</strong> 4-6 hours</li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
       {/* Features Section */}
       <section className="features">
