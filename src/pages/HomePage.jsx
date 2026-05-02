@@ -310,11 +310,11 @@ const HomePage = () => {
           <div className="product-modal-specs">
             <h3>Specifications</h3>
             <ul>
-              <li><strong>Battery:</strong> 48V 20Ah Lithium-ion</li>
-              <li><strong>Range:</strong> Up to 60 miles</li>
+              <li><strong>Battery:</strong> 60V/72v</li>
+              <li><strong>Range:</strong> Up to 80km</li>
               <li><strong>Motor:</strong> 750W Brushless</li>
-              <li><strong>Max Speed:</strong> 28 mph</li>
-              <li><strong>Charging Time:</strong> 4-6 hours</li>
+              <li><strong>Max Speed:</strong> 55 mph</li>
+              <li><strong>Charging Time:</strong> 8-9 hours</li>
             </ul>
           </div>
           
